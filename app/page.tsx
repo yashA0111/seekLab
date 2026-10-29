@@ -12,7 +12,7 @@ export default function Home() {
   const [min,setMin] = useState(0);
   const [max,setMax] = useState(199);
   const parsed = queueText.split(',').map(v=>v.trim()).filter(Boolean).map(Number);
-  const result = useMemo(()=>{try{return {trace:schedule(algorithm,{queue:parsed,head,min,max,direction}),error:''}}catch(e){return {trace:null,error:e instanceof Error?e.message:'Invalid configuration'}}},[algorithm,head,queueText,direction,min,max]);
+  const result = useMemo(()=>{const currentQueue=queueText.split(',').map(v=>v.trim()).filter(Boolean).map(Number);try{return {trace:schedule(algorithm,{queue:currentQueue,head,min,max,direction}),error:''}}catch(e){return {trace:null,error:e instanceof Error?e.message:'Invalid configuration'}}},[algorithm,head,queueText,direction,min,max]);
   const trace = result.trace;
   const randomize=()=>setQueueText(Array.from({length:8},()=>Math.floor(Math.random()*(max-min+1))+min).join(', '));
   return <div>
