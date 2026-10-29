@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Lab(){return <><div className="eyebrow">EXPERIMENT / 01</div><h1>Disk scheduling laboratory</h1><p className="lede">The interactive laboratory lives on the dashboard so configuration, trace, and metrics remain visible together.</p><div className="panel" style={{marginTop:24}}><h2>Continue to the live lab</h2><p className="muted">Open the dashboard laboratory to configure a queue, select one of six algorithms, and inspect its calculated trace.</p><Link href="/#lab" className="btn">Open laboratory ↗</Link></div></>}
