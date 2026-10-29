@@ -1,0 +1,11 @@
+import Link from 'next/link';
+const lessons=[
+['Why disk scheduling exists','Mechanical disk requests compete for a moving read/write head. Scheduling chooses their service order to reduce seek movement while balancing other concerns.'],
+['FCFS — First Come, First Served','Serve requests in arrival order. The rule is simple and predictable, but arrival order can cause large head movements.'],
+['SSTF — Shortest Seek Time First','Choose the outstanding request closest to the current head. Ties in SeekLab choose the lower cylinder; distant requests may wait a long time.'],
+['SCAN — Elevator','Move in one direction, serving requests along the way, continue to the physical boundary, then reverse. Boundary travel contributes to movement.'],
+['C-SCAN — Circular SCAN','Serve in one direction to the boundary, then wrap to the other end. SeekLab marks the wrap as a logical discontinuity and excludes it from physical movement.'],
+['LOOK and C-LOOK','LOOK reverses at the last request in the current direction; C-LOOK wraps between extreme outstanding requests instead of necessarily visiting physical boundaries.'],
+['Analysis and comparison','Sum absolute differences between consecutive physical head positions. Compare workloads rather than declaring one algorithm universally best.']
+];
+export default function Learn(){return <><div className="eyebrow">GUIDED CURRICULUM</div><h1>Learn by predicting.</h1><p className="lede">A progressive path from the physical model to algorithm trade-offs. Read a concept, then test your intuition in the lab.</p><div className="lesson-list">{lessons.map((l,i)=><article className="lesson" key={l[0]}><div className="lesson-num">{String(i+1).padStart(2,'0')}</div><div><h3>{l[0]}</h3><p>{l[1]}</p></div><Link className="pill" href="/#lab">Experiment ↗</Link></article>)}</div><div className="panel" style={{marginTop:20}}><div className="eyebrow">FORMULA</div><h2 style={{marginTop:12}}>Total physical head movement</h2><p className="lede mono">Σ |Hᵢ − Hᵢ₋₁|</p><p className="muted">Add the absolute difference between each pair of consecutive physical head positions. A circular wrap is shown separately and excluded from the physical movement total in this model.</p><Link className="btn" href="/#lab">Try an example ↗</Link></div></>}
