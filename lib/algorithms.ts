@@ -48,7 +48,7 @@ export function schedule(algorithm:Algorithm,c:DiskConfig):Trace{
   if(circular){
    const wrapTarget=algorithm==='C-SCAN'?(dir==='right'?c.min:c.max):(dir==='right'?Math.max(...pending.map(r=>r.position)):Math.min(...pending.map(r=>r.position)));
    if(pos!==wrapTarget)visit(wrapTarget,'wrap','Circular wrap; excluded from physical movement',false);
-   const values=unique(pending.filter(r=>dir==='right'?r.position<=wrapTarget:r.position>=wrapTarget),dir==='left');
+   const values=unique(algorithm==='C-SCAN'?pending:pending.filter(r=>dir==='right'?r.position<=wrapTarget:r.position>=wrapTarget),algorithm==='C-SCAN'?dir==='right':dir==='left');
    for(const p of values)serve(p);
   }else{
    dir=dir==='right'?'left':'right';directionChanges++;scanDirection(dir);
